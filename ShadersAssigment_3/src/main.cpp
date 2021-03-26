@@ -179,10 +179,11 @@ void display()
         str = "Cam mode: FP";
 		g_text.draw(10, 30, const_cast<char*>(str.c_str()), g_winWidth, g_winHeight);
 	}
-	str = "vertex count: " + std::to_string(g_meshFirst.vert_num);
+
+	/*str = "vertex count: " + std::to_string(g_meshFirst.vert_num);
 	g_text.draw(10, 45, const_cast<char*>(str.c_str()), g_winWidth, g_winHeight);
 	str = "triangle count: " + std::to_string(g_meshFirst.tri_num);
-	g_text.draw(10, 60, const_cast<char*>(str.c_str()), g_winWidth, g_winHeight);
+	g_text.draw(10, 60, const_cast<char*>(str.c_str()), g_winWidth, g_winHeight);*/
 		
 	initializePointLightData();
 
