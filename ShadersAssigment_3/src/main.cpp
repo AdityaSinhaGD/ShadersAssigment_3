@@ -68,6 +68,8 @@ vec3 g_lightPos = vec3(3, 3, 3);
 float g_time = 0.0f;
 PointLight lights[2];
 
+int lightSelectionIndex = 0;
+
 
 void initializePointLightData()
 {
@@ -83,6 +85,36 @@ void initializePointLightData()
 	lights[1].specular = vec3(1.0f, 0.0, 0.0);
 	lights[1].position = vec3(1.0f, 0.0, -2.0f);
 	lights[1].coeff = 20;
+}
+
+void drawSelectedPointLight()
+{
+	glUseProgram(0);
+
+	glPushMatrix();
+	glTranslatef(lights[0].position.x, lights[0].position.y, lights[0].position.z);
+	if (lightSelectionIndex == 0)
+	{
+		glutSolidSphere(1, 50, 50);
+	}
+	else
+	{
+		glutWireSphere(1, 50, 50);
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(lights[1].position.x, lights[1].position.y, lights[1].position.z);
+	if (lightSelectionIndex == 1)
+	{
+		glutSolidSphere(1, 50, 50);
+	}
+	else
+	{
+		glutWireSphere(1, 50, 50);
+	}
+
+	glPopMatrix();
 }
 
 void initialization() 
@@ -154,6 +186,8 @@ void display()
 	//g_mesh.draw(g_cam.viewMat, g_cam.projMat, g_lightPos, g_time);
 	g_meshFirst.draw(g_cam.viewMat, g_cam.projMat, lights, vec3(0.0, 2.0, 0.0), vec3(0.5, 0.5, 0.5), vec3(g_cam.eye.x, g_cam.eye.y, g_cam.eye.z));
 	g_meshSecond.draw(g_cam.viewMat, g_cam.projMat, lights, vec3(3.0, 2.0, 0.0), vec3(0.5, 0.5, 0.5), vec3(g_cam.eye.x, g_cam.eye.y, g_cam.eye.z));
+
+	drawSelectedPointLight();
 
     glutSwapBuffers();
 }
