@@ -70,6 +70,10 @@ PointLight lights[2];
 
 int lightSelectionIndex = 0;
 
+vec3 currentLightPositions[] = {
+	vec3(3.0f,3.0f,3.0f),
+	vec3(1.0f,0.0,-2.0f)
+};
 
 void initializePointLightData()
 {
@@ -77,13 +81,13 @@ void initializePointLightData()
 	lights[0].ambient = vec3(0.0, 0.15f, 0.0);
 	lights[0].diffuse = vec3(1.0f, 1.0f, 0.0);
 	lights[0].specular = vec3(1.0f, 0.0, 0.0);
-	lights[0].position = vec3(3.0f, 3.0f, 3.0f);
+	lights[0].position = currentLightPositions[0];
 	lights[0].coeff = 20;
 
 	lights[1].ambient = vec3(0.0, 0.0, 0.15f);
 	lights[1].diffuse = vec3(1.0f, 0.0, 1.0f);
 	lights[1].specular = vec3(1.0f, 0.0, 0.0);
-	lights[1].position = vec3(1.0f, 0.0, -2.0f);
+	lights[1].position = currentLightPositions[1];
 	lights[1].coeff = 20;
 }
 
@@ -95,11 +99,11 @@ void drawSelectedPointLight()
 	glTranslatef(lights[0].position.x, lights[0].position.y, lights[0].position.z);
 	if (lightSelectionIndex == 0)
 	{
-		glutSolidSphere(1, 50, 50);
+		glutSolidSphere(0.2, 50, 50);
 	}
 	else
 	{
-		glutWireSphere(1, 50, 50);
+		glutWireSphere(0.2, 50, 50);
 	}
 	glPopMatrix();
 
@@ -107,11 +111,11 @@ void drawSelectedPointLight()
 	glTranslatef(lights[1].position.x, lights[1].position.y, lights[1].position.z);
 	if (lightSelectionIndex == 1)
 	{
-		glutSolidSphere(1, 50, 50);
+		glutSolidSphere(0.2, 50, 50);
 	}
 	else
 	{
-		glutWireSphere(1, 50, 50);
+		glutWireSphere(0.2, 50, 50);
 	}
 
 	glPopMatrix();
@@ -119,7 +123,7 @@ void drawSelectedPointLight()
 
 void initialization() 
 {    
-    g_cam.set(1.0f, 2.0f, 4.0f, 0.0f, 1.0f, -0.5f, g_winWidth, g_winHeight);
+    g_cam.set(3.0f, 4.0f, 14.0f, 0.0f, 1.0f, -0.5f, g_winWidth, g_winHeight);
 	g_text.setColor(0.0f, 0.0f, 0.0f);
 
 	g_meshFirst.create(meshFile, v_shader_file_1, f_shader_file_1);
@@ -238,6 +242,31 @@ void keyboard(unsigned char key, int x, int y)
 			break;
 		case'-':
 			g_meshFirst.normal_offset -= 0.01;
+			break;
+		case '1':
+			lightSelectionIndex = 0;
+			break;
+		case '2':
+			lightSelectionIndex = 1;
+			break;
+		case 'a':
+			currentLightPositions[lightSelectionIndex] -= vec3(0.1f, 0.0, 0.0);
+			break;
+		case 'd':
+			currentLightPositions[lightSelectionIndex] += vec3(0.1f, 0.0, 0.0);
+			break;
+		case 'w':
+			currentLightPositions[lightSelectionIndex] += vec3(0.0, 0.0, 0.1f);
+			break;
+		case's':
+			currentLightPositions[lightSelectionIndex] -= vec3(0.0, 0.0, 0.1f);
+			break;
+		case 'u':
+			currentLightPositions[lightSelectionIndex] += vec3(0.0, 0.1f, 0.0);
+			break;
+		case 'j':
+			currentLightPositions[lightSelectionIndex] -= vec3(0.0, 0.1f, 0.0);
+			break;
 	}
 }
 
