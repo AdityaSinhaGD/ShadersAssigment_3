@@ -231,8 +231,8 @@ void keyboard(unsigned char key, int x, int y)
 			exit(0);
 			break;
         case 'c': // switch cam control mode
-            g_cam.switchCamMode();
-			glutPostRedisplay();
+            //g_cam.switchCamMode();
+			//glutPostRedisplay();
             break;
         case ' ':
             g_cam.PrintProperty();
