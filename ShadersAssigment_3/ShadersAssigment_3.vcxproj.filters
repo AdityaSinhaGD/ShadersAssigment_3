@@ -47,5 +47,14 @@
     <ClInclude Include="src\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\PointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\PhongPerVert.vert" />
+    <None Include="src\PhongPerFrag.vert" />
+    <None Include="src\PhongPerVert.frag" />
+    <None Include="src\PhongPerFrag.frag" />
   </ItemGroup>
 </Project>

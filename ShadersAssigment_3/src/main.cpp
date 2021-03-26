@@ -39,14 +39,14 @@ Text g_text;
 unsigned char g_keyStates[256];
 
 char v_shader_file[] =
-".\\shaders\\basic.vert";
+".\\src\\PhongPerFrag.vert";
 //".\\shaders\\displacement.vert"; // vertex displacement shader with perlin noise
 //".\\shaders\\perVert_lambert.vert"; // basic lambert lighting  
 // ".\\shaders\\perFrag_lambert.vert"; // basic lambert lighting with per-fragment implementation
 // ".\\shaders\\toon_shading.vert"; // basic toon shading with per-fragment implementation
 
 char f_shader_file[] =
-".\\shaders\\basic.frag";
+".\\src\\PhongPerFrag.frag";
 // ".\\shaders\\displacement.frag"; // vertex displacement shader with perlin noise
 // ".\\shaders\\perVert_lambert.frag"; // basic lambert shading 
 // ".\\shaders\\perFrag_lambert.frag"; // basic lambert shading with per-fragment implementation
@@ -55,13 +55,31 @@ char f_shader_file[] =
 const char meshFile[128] = 
 //"Mesh/sphere.obj";
 //"Mesh/bunny2K.obj";
-//"Mesh/teapot.obj";
-"Mesh/teddy.obj";
+"Mesh/teapot.obj";
+//"Mesh/teddy.obj";
 
 Mesh g_mesh;
 
 vec3 g_lightPos = vec3(3, 3, 3);
 float g_time = 0.0f;
+PointLight lights[2];
+
+
+void initializePointLightData()
+{
+	lights[0] = {};
+	lights[0].ambient = vec3(0.0, 0.15f, 0.0);
+	lights[0].diffuse = vec3(1.0f, 1.0f, 0.0);
+	lights[0].specular = vec3(1.0f, 0.0, 0.0);
+	lights[0].position = vec3(3.0f, 3.0f, 3.0f);
+	lights[0].coeff = 20;
+
+	lights[1].ambient = vec3(0.0, 0.0, 0.15f);
+	lights[1].diffuse = vec3(1.0f, 0.0, 1.0f);
+	lights[1].specular = vec3(1.0f, 0.0, 0.0);
+	lights[1].position = vec3(1.0f, 0.0, -2.0f);
+	lights[1].coeff = 20;
+}
 
 void initialization() 
 {    
@@ -125,9 +143,11 @@ void display()
 	str = "triangle count: " + std::to_string(g_mesh.tri_num);
 	g_text.draw(10, 60, const_cast<char*>(str.c_str()), g_winWidth, g_winHeight);
 		
+	initializePointLightData();
 
 	g_time = (float)glutGet(GLUT_ELAPSED_TIME)/1000.0f;
-	g_mesh.draw(g_cam.viewMat, g_cam.projMat, g_lightPos, g_time);
+	//g_mesh.draw(g_cam.viewMat, g_cam.projMat, g_lightPos, g_time);
+	g_mesh.draw(g_cam.viewMat, g_cam.projMat, lights, vec3(0.0, 2.0, 0.0), vec3(0.5, 0.5, 0.5), vec3(g_cam.eye.x, g_cam.eye.y, g_cam.eye.z));
 
     glutSwapBuffers();
 }

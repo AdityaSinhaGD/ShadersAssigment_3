@@ -19,6 +19,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "PointLight.h"
+
 using namespace std;
 using namespace glm;
 
@@ -53,6 +55,8 @@ public:
     void create (const char* filename, const  char* v_shader_file, const char* f_shader_file);
 
     void draw(mat4 viewMat, mat4 projMat, vec3 lightPos, float time);
+
+	void draw(mat4 viewMat, mat4 projMat, PointLight lights[], vec3 translation, vec3 scaleVal, vec3 eyePos);
 
 private:
 	void computeNormals(); // compute both face and vertex normals

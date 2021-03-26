@@ -125,7 +125,7 @@ void Camera::setViewMatrix()
 {	
 	viewMat = lookAt(eye.xyz(), lookat.xyz(), world_up.xyz());
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(value_ptr(projMat));
+	glLoadMatrixf(value_ptr(viewMat));//Possible Typo.
 	//glLoadIdentity();
 	//gluLookAt(eye.x, eye.y, eye.z,
 	//          lookat.x, lookat.y, lookat.z,
