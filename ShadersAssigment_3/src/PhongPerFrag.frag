@@ -28,7 +28,7 @@ vec3 CalculatePhongValue(PointLight light, vec3 worldNormal, vec3 worldPosition)
 	vec3 specular = light.specular*spec;
 	vec3 diffuse = light.diffuse*diff;
 
-	return (ambient+specular+diffuse);
+	return (ambient+specular+diffuse)*0.5f;
 }
 
 void main() {
