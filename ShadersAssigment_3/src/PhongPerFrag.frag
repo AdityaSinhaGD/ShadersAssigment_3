@@ -17,7 +17,7 @@ uniform vec3 eyePos;
 out vec4 frag_color;
 
 
-vec3 CalculateIntensity(PointLight light, vec3 worldNormal, vec3 worldPosition){
+vec3 CalculatePhongValue(PointLight light, vec3 worldNormal, vec3 worldPosition){
 	vec3 lightDir = normalize(light.position - worldPosition);
 	float diff = max(dot(worldNormal, lightDir), 0.0);
 	vec3 reflectDir = reflect(-lightDir, worldNormal);
@@ -35,8 +35,7 @@ void main() {
     vec3 worldNormFrag = normalize(worldNorm);
 	vec3 result = vec3(0.0,0.0,0.0);
     for(int i=0;i<2;i++){
-	//intensity += CalculateIntensity(lightPos[i]);
-	result += CalculateIntensity(pointLights[i], worldNormFrag, worldPos);
+	result += CalculatePhongValue(pointLights[i], worldNormFrag, worldPos);
     }
 
 
