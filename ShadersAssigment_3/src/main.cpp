@@ -59,7 +59,7 @@ char f_shader_file_2[] = ".\\src\\PhongPerFrag.frag";
 const char meshFile[128] = 
 //"Mesh/sphere.obj";
 //"Mesh/bunny2K.obj";
-"Mesh/teapot.obj";
+"src/teapot.obj";
 //"Mesh/teddy.obj";
 
 Mesh g_meshFirst, g_meshSecond;
